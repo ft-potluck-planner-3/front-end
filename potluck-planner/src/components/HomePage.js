@@ -1,5 +1,5 @@
 import React from "react";
-import SingUp from "./SingUp";
+import SignUp from "./SignUp";
 
 
 const HomePage = () => {
@@ -7,7 +7,7 @@ const HomePage = () => {
     <div>
       <h1>Hello, I am the HOMEPAGE!</h1>
       <div>
-        <SingUp />
+        <SignUp />
       </div>
     </div>
   );
