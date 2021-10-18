@@ -7,7 +7,7 @@ const initialValues = {
 }
 const initialError = '';
 
-const SingUp = (props) => {
+const SignUp = (props) => {
     
 
 const [credentials, setCredentials] = useState(initialValues);
@@ -26,7 +26,7 @@ const handleChanges = e => {
             <button className="homeButton">Home</button>
                 <div className="loginContainer">
 
-                    <from className="loginForm">
+                    <form className="loginForm">
                 <label> Name
                         <input 
                         type="loginInput" 
@@ -55,7 +55,7 @@ const handleChanges = e => {
                     />
                 </label>
 
-                    </from>
+                    </form>
                 </div>
 
 
@@ -63,4 +63,4 @@ const handleChanges = e => {
 
     )}
 
-export default SingUp
+export default SignUp
