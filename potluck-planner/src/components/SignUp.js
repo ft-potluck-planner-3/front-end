@@ -54,6 +54,25 @@ const handleChanges = e => {
                         value={credentials.password}
                     />
                 </label>
+                <label>Guest
+
+                <input 
+                type="radio"
+                name="userType"
+                value="guest"
+                onChange={handleChanges}
+                checked={credentials.userType === 'guest'}
+                />
+                </label>
+                <label>Organizer
+                <input
+                type="radio"
+                name="userType"
+                value="organizer"
+                onChange={handleChanges}
+                checked={credentials.userType === 'organizer'}
+                />
+                </label>
 
                     </form>
                 </div>
