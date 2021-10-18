@@ -1,6 +1,15 @@
 // Component Imports
 import HomePage from "./components/HomePage";
+import Login from "./components/Login";
+import PotluckForm from "./components/PotluckForm";
+import PotluckList from "./components/PotluckList";
+import SignUp from "./components/SignUp";
+import Potluck from "./components/Potluck";
+import Logout from "./components/Logout";
+
+// Library Imports
 import { NavLink, Route, Switch } from "react-router-dom";
+
 function App() {
   return (
     <div className="App">
@@ -11,9 +20,32 @@ function App() {
           <NavLink to="/signup">Sign-up</NavLink>
           <NavLink to="/potlucks">View Potlucks</NavLink>
           <NavLink to="/create">Create Potlucks</NavLink>
+          <NavLink to="/logout">Logout</NavLink>
         </div>
       </nav>
-      <HomePage />
+      <Switch>
+        <Route to="/logout">
+          <Logout />
+        </Route>
+        <Route to="/potlucks/:id">
+          <Potluck />
+        </Route>
+        <Route path="/create">
+          <PotluckForm />
+        </Route>
+        <Route path="/potlucks">
+          <PotluckList />
+        </Route>
+        <Route path="/signup">
+          <SignUp />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/">
+          <HomePage />
+        </Route>
+      </Switch>
     </div>
   );
 }
