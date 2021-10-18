@@ -1,13 +1,13 @@
 Instructions
-Do NOT fork.
-Clone the project.
-cd into the potluck-planner folder
-run npm install to download dependencies
-run npm start to see the project locally
-create feature branches to work on stuff
-make sure your code doesn't introduce errors to the running app
-commit, push, make a pull request often and tell the team so they can merge your PR
-make sure you are working with the latest code by using git pull origin main
+* [ ] Do NOT fork.
+* [ ] Clone the project.
+* [ ] cd into the potluck-planner folder
+* [ ] run npm install to download dependencies
+* [ ] run npm start to see the project locally
+* [ ] create feature branches to work on stuff
+* [ ] make sure your code doesn't introduce errors to the running app
+* [ ] commit, push, make a pull request often and tell the team so they can merge your PR
+* [ ] make sure you are working with the latest code by using git pull origin main
 
 # Getting Started with Create React App
 
