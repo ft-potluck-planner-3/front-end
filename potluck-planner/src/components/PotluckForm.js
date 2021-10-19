@@ -30,6 +30,7 @@ const PotluckForm = () => {
   };
 
   // ----- Guest List Handlers -----
+
   const handleGuestInput = (index, event) => {
     const values = [...guestList];
     values[index][event.target.name] = event.target.value;
@@ -54,6 +55,7 @@ const PotluckForm = () => {
   };
 
   // ----- Food List Handlers -----
+
   const handleFoodInput = (index, event) => {
     const values = [...foodList];
     values[index][event.target.name] = event.target.value;
@@ -77,7 +79,7 @@ const PotluckForm = () => {
     console.log("Food List", foodList);
   };
 
-  // Returning Potluck Form
+  // ----- Returning Potluck Form -----
 
   return (
     <form>
