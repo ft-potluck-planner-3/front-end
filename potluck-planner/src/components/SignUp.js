@@ -1,81 +1,84 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router';
+import axios from 'axios';
 
 const initialValues = {
-    name: '',
     username: '',
-    password: ''
+    password: '',
+    role: ''
 }
 const initialError = '';
 
 const SignUp = (props) => {
     
+    const [credentials, setCredentials] = useState(initialValues);
+    
+    const [error, setError] = useState(initialError);
+    const { push } = useHistory();
 
-const [credentials, setCredentials] = useState(initialValues);
+    const handleChanges = e => {
+        setCredentials({
+            ...credentials,
+            [e.target.name]: e.target.value
+        })
+    }
 
-const [error, setError] = useState(initialError);
-
-const handleChanges = e => {
-    setCredentials({
-        ...credentials,
-        [e.target.name]: e.target.value
-    })
-}
+    const handleSubmit = e => {
+        e.preventDefault();
+        
+        axios.post("https://potluckplanner3.herokuapp.com/api/users/register", credentials)
+            .then(resp => {
+                console.log(resp);
+                setCredentials(initialValues);
+                push('/login');
+            })
+            .catch(err => {
+                console.log('signup error: ', err);
+            })
+    }
 
     return (
         <section className="loginSection">
-            <button className="homeButton">Home</button>
-                <div className="loginContainer">
-
-                    <form className="loginForm">
-                <label> Name
-                        <input 
-                        type="loginInput" 
-                        name="name"
-                        placeholder="Name"
-                        onChange={handleChanges}
-                        value={credentials.name}
-                        />
-                </label>
-                        
-                <label>Username
+            <div className="loginContainer">
+                <form onSubmit={handleSubmit} className="loginForm">
+                    <label>Username
+                            <input
+                            type="text"
+                            name="username"
+                            placeholder="Username"
+                            onChange={handleChanges}
+                            value={credentials.username}
+                            />
+                    </label>
+                    <label>Password
                         <input
-                        type="text"
-                        name="username"
-                        placeholder="Username"
-                        onChange={handleChanges}
-                        value={credentials.username}
+                            type="password"
+                            name="password"
+                            onChange={handleChanges}
+                            value={credentials.password}
                         />
-                </label>
-                <label>password
-                    <input
-                        type="password"
-                        name="password"
-                        onChange={handleChanges}
-                        value={credentials.password}
+                    </label>
+                    <label>Guest
+                    <input 
+                    type="radio"
+                    name="role"
+                    value="guest"
+                    onChange={handleChanges}
+                    checked={credentials.role === 'guest'}
                     />
-                </label>
-                <label>Guest
-
-                <input 
-                type="radio"
-                name="userType"
-                value="guest"
-                onChange={handleChanges}
-                checked={credentials.userType === 'guest'}
-                />
-                </label>
-                <label>Organizer
-                <input
-                type="radio"
-                name="userType"
-                value="organizer"
-                onChange={handleChanges}
-                checked={credentials.userType === 'organizer'}
-                />
-                </label>
-
-                    </form>
-                </div>
+                    </label>
+                    <label>Organizer
+                    <input
+                    type="radio"
+                    name="role"
+                    value="organizer"
+                    onChange={handleChanges}
+                    checked={credentials.role === 'organizer'}
+                    />
+                    </label>
+                    <button>Submit Signup Info</button>
+                </form>
+            </div>
 
 
         </section>
