@@ -1,40 +1,24 @@
 import React from "react";
-import { useParams } from "react-router-dom";
-
-const fakePotlucks = [{
-    id: 1, 
-    potluckName: 'Neighborhood Potluck 0',
-    date: '10/18',
-    time: '5pm',
-    location: 'The cul de sac',
-    foods: ['item 1', 'item 2'],
-    guests: ['guest 1', 'guest 2'] 
-  },
-  {
-    id: 2, 
-    potluckName: 'Neighborhood Potluck 2',
-    date: '10/18',
-    time: '5pm',
-    location: '123',
-    foods: ['item 1', 'item 2'],
-    guests: ['guest 1', 'guest 2'] 
-  },
-  {
-    id: 3, 
-    potluckName: 'Neighborhood Potluck 3',
-    date: '10/18',
-    time: '5pm',
-    location: '345',
-    foods: ['item 1', 'item 2'],
-    guests: ['guest 1', 'guest 2'] 
-  }
-  ]
+import { Link, useParams, useHistory } from "react-router-dom";
+import axios from 'axios';
+import { connect } from 'react-redux';
 
 const Potluck = (props) => {
     const {id} = useParams();
-    
-    const potluck = fakePotlucks.find(potluck => potluck.id === parseInt(id))
+    const { push } = useHistory();
+    const { potlucks } = props;
+    const potluck = potlucks.find(potluck => potluck.id === parseInt(id))
 
+    const handleDelete = () => {
+        axios.delete(`https://potluckplanner3.herokuapp.com/api/potlucks/${id}`)
+            .then(resp => {
+                //delete the potluck from state
+                push('/potlucks')
+            })
+            .catch(err => {
+                console.log('potluck delete error: ', err);
+            })
+    }
     return <div className="potluck" key={id}>
         <h3>{potluck.potluckName}</h3>
         <p>Date: {potluck.date}</p>
@@ -44,8 +28,16 @@ const Potluck = (props) => {
         <ul>{potluck.foods.map((food, index) => <li key={index}>{food} <button>Bring This Food</button></li>)}</ul>
         <p>Guest List:</p>
         <ul>{potluck.guests.map((guest, index) => <li key={index}>{guest} <button>RSVP</button></li>)}</ul>
-        <button>Edit Potluck Details</button>
-        <button>Delete this Potluck</button>
+        <section>
+            <Link to={`/potlucks/edit/${potluck.id}`}>Edit Potluck Details</Link>
+            <span><input type="button" onClick={handleDelete} value="Delete this Potluck"/></span>
+        </section>
     </div>;
 };
-export default Potluck;
+
+const mapStateToProps = state => {
+    return {
+        potlucks: state.potlucks
+    }
+}
+export default connect(mapStateToProps)(Potluck);

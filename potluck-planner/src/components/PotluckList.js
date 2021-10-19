@@ -1,45 +1,15 @@
 import React from "react";
-
+import { connect } from 'react-redux';
 
 import Potluck from "./Potluck";
 import { Route, Link } from 'react-router-dom'
 
-
-const fakePotlucks = [{
-  id: 1, 
-  potluckName: 'Neighborhood Potluck 1',
-  date: '10/18',
-  time: '5pm',
-  location: 'The cul de sac',
-  foods: ['item 1', 'item 2'],
-  guests: ['guest 1', 'guest 2'] 
-},
-{
-  id: 2, 
-  potluckName: 'Neighborhood Potluck 2',
-  date: '10/18',
-  time: '5pm',
-  location: '123',
-  foods: ['item 1', 'item 2'],
-  guests: ['guest 1', 'guest 2'] 
-},
-{
-  id: 3, 
-  potluckName: 'Neighborhood Potluck 3',
-  date: '10/18',
-  time: '5pm',
-  location: '345',
-  foods: ['item 1', 'item 2'],
-  guests: ['guest 1', 'guest 2'] 
-}
-]
-
-const PotluckList = () => {
-
+const PotluckList = (props) => {
+  const { potlucks } = props;
 
   return (<div>
     
-    {fakePotlucks.map(potluck =>{
+    {potlucks.map(potluck =>{
       return (
       <div key={potluck.id}> 
       <h3>{potluck.potluckName}</h3>
@@ -55,4 +25,9 @@ const PotluckList = () => {
     </Route>
   </div>
   )};
-export default PotluckList;
+
+const mapStateToProps = state => ({
+  potlucks: state.potlucks
+})
+
+export default connect(mapStateToProps)(PotluckList);

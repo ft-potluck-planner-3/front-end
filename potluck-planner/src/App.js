@@ -6,7 +6,7 @@ import PotluckList from "./components/PotluckList";
 import SignUp from "./components/SignUp";
 import Potluck from "./components/Potluck";
 import Logout from "./components/Logout";
-
+import EditPotluckForm from "./components/EditPotluckForm";
 import PrivateRoute from './components/PrivateRoute';
 
 
@@ -34,6 +34,8 @@ function App() {
         <Route path="/logout">
           <Logout />
         </Route>
+
+        <PrivateRoute path="/potlucks/edit/:id" component={EditPotluckForm} />
         
         <PrivateRoute path="/potlucks/:id" component={Potluck} />
 
