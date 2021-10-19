@@ -1,6 +1,4 @@
 import React from "react";
-import SignUp from "./SignUp";
-
 
 const HomePage = () => {
   return (
@@ -18,8 +16,6 @@ const HomePage = () => {
           In the world of social gatherings and potlucks the "Potluck Planner"
           is king. This is your place for all things pot luck.
         </p>
-        <SignUp />
-
       </div>
     </div>
   );

@@ -24,10 +24,10 @@ function Login() {
 
     const handleSubmit = e => {
         e.preventDefault();
-        axios.post("http://localhost:5000/api/login", credentials)
+        axios.post("https://potluckplanner3.herokuapp.com/api/users/login", credentials)
             .then(resp => {
-                localStorage.setItem("token", resp.data.token);
-                push('/create')
+                localStorage.setItem("token", resp.body.token);
+                push('/potlucks')
             })
             .catch(err => {
                 console.log('login error:', err);
