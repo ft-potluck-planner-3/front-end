@@ -1,5 +1,5 @@
 // Library Imports
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import axios from "axios";
 
 const PotluckForm = () => {
@@ -20,6 +20,29 @@ const PotluckForm = () => {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [guestList, setGuestList] = useState(initialGuests);
   const [foodList, setFoodList] = useState(initialFoods);
+  // Disable Remove Guest Button if guestList has only 1 item
+  const [disableRemoveGuest, setDisableRemoveGuest] = useState(true);
+  const [disableRemoveFood, setDisableRemoveFood] = useState(true);
+
+  // Disable / Enable Remove Buttons
+
+  // Guest Remove Button
+  useEffect(() => {
+    if (guestList.length < 2) {
+      setDisableRemoveGuest(true);
+    } else {
+      setDisableRemoveGuest(false);
+    }
+  }, [guestList]);
+
+  // Food Remove Button
+  useEffect(() => {
+    if (foodList.length < 2) {
+      setDisableRemoveFood(true);
+    } else {
+      setDisableRemoveFood(false);
+    }
+  }, [foodList]);
 
   // Form Event Handlers
   const handleChanges = (event) => {
@@ -140,6 +163,7 @@ const PotluckForm = () => {
                 +
               </button>
               <button
+                disabled={disableRemoveGuest}
                 onClick={(event) => {
                   handleRemoveGuest(event, index);
                 }}
@@ -172,6 +196,7 @@ const PotluckForm = () => {
                 +
               </button>
               <button
+                disabled={disableRemoveFood}
                 onClick={(event) => {
                   handleRemoveFood(event, index);
                 }}
