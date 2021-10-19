@@ -41,7 +41,7 @@ const PotluckList = () => {
     
     {fakePotlucks.map(potluck =>{
       return (
-      <div> 
+      <div key={potluck.id}> 
       <h3>{potluck.potluckName}</h3>
       <p>Date: {potluck.date}</p>
       <p>Time: {potluck.time}</p>
@@ -51,7 +51,7 @@ const PotluckList = () => {
       
     })}
     <Route path={`/potlucks/:id`}>
-    <Potluck potlucks={fakePotlucks} />
+    <Potluck />
     </Route>
   </div>
   )};

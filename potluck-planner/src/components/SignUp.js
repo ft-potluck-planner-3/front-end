@@ -33,6 +33,7 @@ const SignUp = (props) => {
             })
             .catch(err => {
                 console.log('signup error: ', err);
+                setError(err);
             })
     }
 
@@ -77,6 +78,7 @@ const SignUp = (props) => {
                     </label>
                     <button>Submit Signup Info</button>
                 </form>
+                { error && <p>We have a SignUp error: {error}</p>}
             </div>
 
 
