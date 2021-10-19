@@ -74,7 +74,7 @@ const PotluckForm = () => {
           onChange={handleChanges}
         />
       </label>
-      <label>
+      {/* <label>
         Add Guests:
         <input
           type="text"
@@ -83,7 +83,7 @@ const PotluckForm = () => {
           onChange={handleChanges}
         />
       </label>
-      <button onClick={handleSubmitGuest}>Submit Guest</button>
+      <button onClick={handleSubmitGuest}>Submit Guest</button> */}
     </form>
   );
 };
