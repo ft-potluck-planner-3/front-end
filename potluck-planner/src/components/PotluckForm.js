@@ -1,6 +1,6 @@
 // Library Imports
 import React, { useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 
 const PotluckForm = () => {
   // Initializing Form Data
@@ -13,15 +13,18 @@ const PotluckForm = () => {
     foods: [],
   };
 
-  // State
-  const [formValues, setFormValues] = useState(initialFormValues);
-  const [guest, setGuest] = useState("");
+  const initialGuests = [{ username: "" }];
 
-  // Handlers
-  const handleChanges = (e) => {
+  // State Managment
+  const [formValues, setFormValues] = useState(initialFormValues);
+  const [guestList, setGuestList] = useState(initialGuests);
+  // const [foodItems, setFoodItems] = useState([]);
+
+  // Event Handlers
+  const handleChanges = (event) => {
     setFormValues({
       ...formValues,
-      [e.target.name]: e.target.value,
+      [event.target.name]: event.target.value,
     });
   };
 
@@ -29,6 +32,7 @@ const PotluckForm = () => {
 
   // const handleSubmitGuest = (event) => {
   //   event.preventDefault();
+
   //   setGuest(formValues.guests);
   //   setFormValues(
   //     ...formValues,
@@ -74,16 +78,26 @@ const PotluckForm = () => {
           onChange={handleChanges}
         />
       </label>
-      {/* <label>
-        Add Guests:
-        <input
-          type="text"
-          name="guest"
-          value={formValues.guest}
-          onChange={handleChanges}
-        />
-      </label>
-      <button onClick={handleSubmitGuest}>Submit Guest</button> */}
+      {/* ----- Guest Inputs ----- */}
+      <div>
+        <label>Add Guests:</label>
+        {guestList.map((guest, index) => {
+          return (
+            <div key={index}>
+              <input
+                type="text"
+                name="username"
+                placeholder="Name"
+                value={guest.username}
+                onChange={handleChanges}
+              />
+              <button>+</button>
+              <button>-</button>
+            </div>
+          );
+        })}
+        <button>Submit Guests</button>
+      </div>
     </form>
   );
 };
