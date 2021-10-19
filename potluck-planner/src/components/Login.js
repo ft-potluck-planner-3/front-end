@@ -9,7 +9,7 @@ const initialValues = {
 
 const initialError = '';
 
-function Login() {
+function Login(props) {
     const [credentials, setCredentials] = useState(initialValues);
     const [error, setError] = useState(initialError);
 
@@ -21,12 +21,12 @@ function Login() {
             [e.target.name]: e.target.value
         })
     }
-
+    
     const handleSubmit = e => {
         e.preventDefault();
         axios.post("https://potluckplanner3.herokuapp.com/api/users/login", credentials)
             .then(resp => {
-                localStorage.setItem("token", resp.body.token);
+                localStorage.setItem("token", resp.data.token);
                 push('/potlucks')
             })
             .catch(err => {

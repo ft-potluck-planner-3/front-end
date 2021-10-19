@@ -28,12 +28,12 @@ const SignUp = (props) => {
         
         axios.post("https://potluckplanner3.herokuapp.com/api/users/register", credentials)
             .then(resp => {
-                console.log(resp);
                 setCredentials(initialValues);
                 push('/login');
             })
             .catch(err => {
                 console.log('signup error: ', err);
+                setError(err);
             })
     }
 
@@ -78,6 +78,7 @@ const SignUp = (props) => {
                     </label>
                     <button>Submit Signup Info</button>
                 </form>
+                { error && <p>We have a SignUp error: {error}</p>}
             </div>
 
 
