@@ -28,7 +28,6 @@ const SignUp = (props) => {
         
         axios.post("https://potluckplanner3.herokuapp.com/api/users/register", credentials)
             .then(resp => {
-                console.log(resp);
                 setCredentials(initialValues);
                 push('/login');
             })
