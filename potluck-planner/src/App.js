@@ -24,10 +24,10 @@ function App() {
         </div>
       </nav>
       <Switch>
-        <Route to="/logout">
+        <Route path="/logout">
           <Logout />
         </Route>
-        <Route to="/potlucks/:id">
+        <Route path="/potlucks/:id">
           <Potluck />
         </Route>
         <Route path="/create">
