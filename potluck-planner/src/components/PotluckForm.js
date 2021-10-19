@@ -20,11 +20,13 @@ const PotluckForm = () => {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [guestList, setGuestList] = useState(initialGuests);
   const [foodList, setFoodList] = useState(initialFoods);
+  // plannedPotluck holds all the potluck data on when the form is submitted
+  const [plannedPotluck, setPlannedPotluck] = useState([]);
   // Disable Remove Guest Button if guestList has only 1 item
   const [disableRemoveGuest, setDisableRemoveGuest] = useState(true);
   const [disableRemoveFood, setDisableRemoveFood] = useState(true);
 
-  // Disable / Enable Remove Buttons
+  // ----- Disable / Enable Remove Buttons -----
 
   // Guest Remove Button
   useEffect(() => {
@@ -44,13 +46,30 @@ const PotluckForm = () => {
     }
   }, [foodList]);
 
-  // Form Event Handlers
+  // ----- Form Event Handlers -----
   const handleChanges = (event) => {
     setFormValues({
       ...formValues,
       [event.target.name]: event.target.value,
     });
   };
+
+  const handleSubmitForm = (event) => {
+    event.preventDefault();
+    console.log(plannedPotluck);
+  };
+
+  useEffect(() => {
+    const newPlannedPotluck = {
+      potluckName: formValues.potluckName,
+      date: formValues.date,
+      time: formValues.time,
+      location: formValues.location,
+      guests: [guestList],
+      foods: [foodList],
+    };
+    setPlannedPotluck(newPlannedPotluck);
+  }, [formValues, guestList, foodList]);
 
   // ----- Guest List Handlers -----
 
@@ -209,7 +228,7 @@ const PotluckForm = () => {
         <button onClick={handleSubmitFoods}>Submit Foods List</button>
       </div>
       {/* Submiting Form */}
-      <button>Submit Form</button>
+      <button onClick={handleSubmitForm}>Submit Potluck Form</button>
     </form>
   );
 };
