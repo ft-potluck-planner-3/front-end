@@ -64,9 +64,12 @@ const PotluckForm = () => {
 
   const handleSubmitForm = (event) => {
     event.preventDefault();
-    console.log(plannedPotluck);
     // Store plannedPotluck into a new state
-    setPotlucks([...potlucks, plannedPotluck]);
+    setPotlucks((potlucks) => {
+      const updated = [...potlucks, plannedPotluck];
+      // console.log(updated);
+      return updated;
+    });
     console.log(potlucks);
     setFormValues(initialFormValues);
     setGuestList(initialGuests);
