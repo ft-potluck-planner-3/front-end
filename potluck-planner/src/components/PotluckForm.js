@@ -15,6 +15,7 @@ const PotluckForm = () => {
 
   // State
   const [formValues, setFormValues] = useState(initialFormValues);
+  const [guest, setGuest] = useState("");
 
   // Handlers
   const handleChanges = (e) => {
@@ -23,6 +24,17 @@ const PotluckForm = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  // Fix Sumbit Guest Handler Tuesday \/\/\/
+
+  // const handleSubmitGuest = (event) => {
+  //   event.preventDefault();
+  //   setGuest(formValues.guests);
+  //   setFormValues(
+  //     ...formValues,
+  //     formValues.guests: [...guests, guest]
+  //   )
+  // };
 
   return (
     <form>
@@ -66,11 +78,12 @@ const PotluckForm = () => {
         Add Guests:
         <input
           type="text"
-          name="guests"
-          value={formValues.guests}
+          name="guest"
+          value={formValues.guest}
           onChange={handleChanges}
         />
       </label>
+      <button onClick={handleSubmitGuest}>Submit Guest</button>
     </form>
   );
 };
