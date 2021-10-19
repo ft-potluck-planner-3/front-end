@@ -41,9 +41,9 @@ const Potluck = (props) => {
         <p>Time: {potluck.time}</p>
         <p>Location: {potluck.location}</p>
         <p>Food List:</p>
-        <ul>{potluck.foods.map((food, index) => <li key={index}>{food}</li>)}</ul>
+        <ul>{potluck.foods.map((food, index) => <li key={index}>{food} <button>Bring This Food</button></li>)}</ul>
         <p>Guest List:</p>
-        <ul>{potluck.guests.map((guest, index) => <li key={index}>{guest}</li>)}</ul>
+        <ul>{potluck.guests.map((guest, index) => <li key={index}>{guest} <button>RSVP</button></li>)}</ul>
         <button>Edit Potluck Details</button>
         <button>Delete this Potluck</button>
     </div>;

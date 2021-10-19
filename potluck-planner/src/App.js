@@ -7,7 +7,7 @@ import SignUp from "./components/SignUp";
 import Potluck from "./components/Potluck";
 import Logout from "./components/Logout";
 
-
+import PrivateRoute from './components/PrivateRoute';
 
 
 
@@ -15,6 +15,9 @@ import Logout from "./components/Logout";
 import { NavLink, Route, Switch } from "react-router-dom";
 
 function App() {
+
+  const isLoggedIn = localStorage.getItem("token");
+
   return (
     <div className="App">
       <nav>
@@ -22,24 +25,22 @@ function App() {
         <div className="nav-links">
           <NavLink to="/login">Login</NavLink>
           <NavLink to="/signup">Sign-up</NavLink>
-          <NavLink to="/potlucks">View Potlucks</NavLink>
-          <NavLink to="/create">Create Potlucks</NavLink>
-          <NavLink to="/logout">Logout</NavLink>
+          {isLoggedIn && <NavLink to="/potlucks">View Potlucks</NavLink>}
+          {isLoggedIn && <NavLink to="/create">Create Potlucks</NavLink>}
+          {isLoggedIn && <NavLink to="/logout">Logout</NavLink>}
         </div>
       </nav>
       <Switch>
         <Route path="/logout">
           <Logout />
         </Route>
-        <Route path="/potlucks/:id">
-          <Potluck />
-        </Route>
-        <Route path="/create">
-          <PotluckForm />
-        </Route>
-        <Route path="/potlucks">
-          <PotluckList />
-        </Route>
+        
+        <PrivateRoute path="/potlucks/:id" component={Potluck} />
+
+        <PrivateRoute path="/create" component={PotluckForm} />
+
+        <PrivateRoute path="/potlucks" component={PotluckList} />
+        
         <Route path="/signup">
           <SignUp />
         </Route>

@@ -7,7 +7,7 @@ import { Route, Link } from 'react-router-dom'
 
 const fakePotlucks = [{
   id: 1, 
-  potluckName: 'Neighborhood Potluck 0',
+  potluckName: 'Neighborhood Potluck 1',
   date: '10/18',
   time: '5pm',
   location: 'The cul de sac',
