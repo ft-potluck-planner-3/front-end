@@ -14,13 +14,14 @@ const PotluckForm = () => {
   };
 
   const initialGuests = [{ username: "" }];
+  const initialFoods = [{ food: "" }];
 
   // State Managment
   const [formValues, setFormValues] = useState(initialFormValues);
   const [guestList, setGuestList] = useState(initialGuests);
-  // const [foodItems, setFoodItems] = useState([]);
+  const [foodList, setFoodList] = useState(initialFoods);
 
-  // Event Handlers
+  // Form Event Handlers
   const handleChanges = (event) => {
     setFormValues({
       ...formValues,
@@ -28,17 +29,55 @@ const PotluckForm = () => {
     });
   };
 
-  // Fix Sumbit Guest Handler Tuesday \/\/\/
+  // ----- Guest List Handlers -----
+  const handleGuestInput = (index, event) => {
+    const values = [...guestList];
+    values[index][event.target.name] = event.target.value;
+    setGuestList(values);
+  };
 
-  // const handleSubmitGuest = (event) => {
-  //   event.preventDefault();
+  const handleAddGuest = (event) => {
+    event.preventDefault();
+    setGuestList([...guestList, { username: "" }]);
+  };
 
-  //   setGuest(formValues.guests);
-  //   setFormValues(
-  //     ...formValues,
-  //     formValues.guests: [...guests, guest]
-  //   )
-  // };
+  const handleRemoveGuest = (event, index) => {
+    event.preventDefault();
+    const values = [...guestList];
+    values.splice(index, 1);
+    setGuestList(values);
+  };
+
+  const handleSubmitGuest = (event) => {
+    event.preventDefault();
+    console.log("Guest List", guestList);
+  };
+
+  // ----- Food List Handlers -----
+  const handleFoodInput = (index, event) => {
+    const values = [...foodList];
+    values[index][event.target.name] = event.target.value;
+    setFoodList(values);
+  };
+
+  const handleAddFood = (event) => {
+    event.preventDefault();
+    setFoodList([...foodList, { food: "" }]);
+  };
+
+  const handleRemoveFood = (event, index) => {
+    event.preventDefault();
+    const values = [...foodList];
+    values.splice(index, 1);
+    setFoodList(values);
+  };
+
+  const handleSubmitFoods = (event) => {
+    event.preventDefault();
+    console.log("Food List", foodList);
+  };
+
+  // Returning Potluck Form
 
   return (
     <form>
@@ -78,7 +117,7 @@ const PotluckForm = () => {
           onChange={handleChanges}
         />
       </label>
-      {/* ----- Guest Inputs ----- */}
+      {/* ----- Guest List Inputs ----- */}
       <div>
         <label>Add Guests:</label>
         {guestList.map((guest, index) => {
@@ -87,17 +126,63 @@ const PotluckForm = () => {
               <input
                 type="text"
                 name="username"
-                placeholder="Name"
+                placeholder="Guest's Name"
                 value={guest.username}
-                onChange={handleChanges}
+                onChange={(event) => handleGuestInput(index, event)}
               />
-              <button>+</button>
-              <button>-</button>
+              <button
+                onClick={(event) => {
+                  handleAddGuest(event);
+                }}
+              >
+                +
+              </button>
+              <button
+                onClick={(event) => {
+                  handleRemoveGuest(event, index);
+                }}
+              >
+                -
+              </button>
             </div>
           );
         })}
-        <button>Submit Guests</button>
+        <button onClick={handleSubmitGuest}>Submit Guest List</button>
       </div>
+      {/* ----- Food List Inputs ----- */}
+      <div>
+        <label>Add Foods:</label>
+        {foodList.map((food, index) => {
+          return (
+            <div key={index}>
+              <input
+                type="text"
+                name="food"
+                placeholder="Food"
+                value={food.food}
+                onChange={(event) => handleFoodInput(index, event)}
+              />
+              <button
+                onClick={(event) => {
+                  handleAddFood(event);
+                }}
+              >
+                +
+              </button>
+              <button
+                onClick={(event) => {
+                  handleRemoveFood(event, index);
+                }}
+              >
+                -
+              </button>
+            </div>
+          );
+        })}
+        <button onClick={handleSubmitFoods}>Submit Foods List</button>
+      </div>
+      {/* Submiting Form */}
+      <button>Submit Form</button>
     </form>
   );
 };
