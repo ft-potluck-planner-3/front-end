@@ -4,7 +4,7 @@ import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { potlucksReducer } from './reducers';
+import potlucksReducer from './reducers';
 
 const store = createStore(potlucksReducer);
 
