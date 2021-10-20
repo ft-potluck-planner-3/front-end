@@ -7,16 +7,13 @@ import SignUp from "./components/SignUp";
 import Potluck from "./components/Potluck";
 import Logout from "./components/Logout";
 import EditPotluckForm from "./components/EditPotluckForm";
-import PrivateRoute from './components/PrivateRoute';
-
-
+import PrivateRoute from "./components/PrivateRoute";
 
 // Library Imports
 import { NavLink, Route, Switch } from "react-router-dom";
 import Footer from "./components/Footer";
 
 function App() {
-
   const isLoggedIn = localStorage.getItem("token");
 
   return (
@@ -37,13 +34,13 @@ function App() {
         </Route>
 
         <PrivateRoute path="/potlucks/edit/:id" component={EditPotluckForm} />
-        
+
         <PrivateRoute path="/potlucks/:id" component={Potluck} />
 
         <PrivateRoute path="/create" component={PotluckForm} />
 
         <PrivateRoute path="/potlucks" component={PotluckList} />
-        
+
         <Route path="/signup">
           <SignUp />
         </Route>
