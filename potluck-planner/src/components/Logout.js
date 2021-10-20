@@ -5,7 +5,7 @@ function Logout(props) {
 
     useEffect(() => {
         axiosWithAuth()
-            .post('https:potluckplanner3.herokuapp.com/api/users/logout')
+            .post('https:potluckplanner3.herokuapp.com/api/users')
             .then(resp => {
                 localStorage.removeItem("token");
                 props.history.push('/login');
