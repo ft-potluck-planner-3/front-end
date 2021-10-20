@@ -1,23 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { deletePotluck } from "../actions";
+import DeletePotluckModal from "./DeletePotluckModal";
 
 const Potluck = (props) => {
     const {id} = useParams();
     const { push } = useHistory();
     const { potlucks } = props;
+    const [showModal, setShowModal] = useState(false);
     const potluck = potlucks.find(potluck => potluck.id === parseInt(id))
 
+
     const handleDelete = () => {
-        axios.delete(`https://potluckplanner3.herokuapp.com/api/potlucks/${id}`)
-            .then(resp => {
-                //delete the potluck from state
-                push('/potlucks')
-            })
-            .catch(err => {
-                console.log('potluck delete error: ', err);
-            })
+        setShowModal(true);
+    }
+
+    const handleDeleteYes = () => {
+        deletePotluck(id);
+        setShowModal(false);
+        push('/potlucks');
+        // axios.delete(`https://potluckplanner3.herokuapp.com/api/potlucks/${id}`)
+        //     .then(resp => {
+        //         deletePotluck(id);
+        //         setShowModal(false);
+        //         push('/potlucks');
+        //     })
+        //     .catch(err => {
+        //         console.log('potluck delete error: ', err);
+        //     })
+    }
+
+    const handleDeleteNo = () => {
+        setShowModal(false);
     }
     return <div className="potluck" key={id}>
         <h3>{potluck.potluckName}</h3>
@@ -31,6 +47,9 @@ const Potluck = (props) => {
         <section>
             <Link to={`/potlucks/edit/${potluck.id}`}>Edit Potluck Details</Link>
             <span><input type="button" onClick={handleDelete} value="Delete this Potluck"/></span>
+            {
+                showModal && <DeletePotluckModal handleDeleteYes={handleDeleteYes} handleDeleteNo={handleDeleteNo} />
+            }
         </section>
     </div>;
 };
@@ -40,4 +59,4 @@ const mapStateToProps = state => {
         potlucks: state.potlucks
     }
 }
-export default connect(mapStateToProps)(Potluck);
+export default connect(mapStateToProps, { deletePotluck })(Potluck);
