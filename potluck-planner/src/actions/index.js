@@ -31,7 +31,7 @@ export const fetchPotluckSuccess = (potluck) => {
 export const fetchFail = () => {
   return ({ type: FETCH_FAIL })
 }
-export const add = (newPotluck) => {
+export const addPotluck = (newPotluck) => {
   return { type: ADD_POTLUCK, payload: newPotluck };
 };
 
@@ -43,7 +43,7 @@ export const newUser = (newUser) => {
   return { type: NEW_USER, payload: newUser };
 };
 
-export const edit = (edited) => {
+export const editPotluck = (edited) => {
   return { type: EDIT_POTLUCK, payload: edited };
 };
 
@@ -54,12 +54,3 @@ export const login = (userID) => {
 export const deletePotluck = (potluckId) => {
   return { type: DELETE_POTLUCK, payload: potluckId}
 }
-
-// export const ADD_POTLUCK = "ADD_POTLUCK";
-
-// export function addPotluck(newPotluck) {
-//     return {
-//         type: ADD_POTLUCK,
-//         payload: newPotluck
-//     }
-// }
