@@ -13,6 +13,7 @@ import PrivateRoute from './components/PrivateRoute';
 
 // Library Imports
 import { NavLink, Route, Switch } from "react-router-dom";
+import Footer from "./components/Footer";
 
 function App() {
 
@@ -51,6 +52,7 @@ function App() {
         </Route>
         <Route path="/">
           <HomePage />
+          <Footer />
         </Route>
       </Switch>
     </div>

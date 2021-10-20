@@ -38,12 +38,7 @@ it('the proper elements are showing', () => {
     timeInput().should('exist');
     locationInput().should('exist');
     foodInput().should('exist');
-
-
     buttonInput().should('exist');
-
-    buttonInput().should('exist');
-  
 })
 
 })
