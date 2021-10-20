@@ -80,8 +80,8 @@ function EditPotluckForm(props) {
  
       //  Trying to make the edit form show the potluck details in the form values
 
-    //   const potluck = potlucks.find(potluck => potluck.id === parseInt(id));
-    //   setFormValues({...formValues, potluckName:potluck.potluckName, date:potluck.date, time:potluck.time, location:potluck.location});
+      const potluck = potlucks.find(potluck => potluck.id === parseInt(id));
+      // setFormValues({...formValues, potluckName:potluck.potluckName, date:potluck.date, time:potluck.time, location:potluck.location});
     //   setGuestList(potluck.guests);
     //   setFoodList(potluck.foods);
 

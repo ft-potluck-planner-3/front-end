@@ -6,7 +6,7 @@ import { Route, Link } from 'react-router-dom'
 
 const PotluckList = (props) => {
   const { potlucks } = props;
-
+  
   return (<div>
     
     {potlucks.map(potluck =>{

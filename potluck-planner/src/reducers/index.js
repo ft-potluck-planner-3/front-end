@@ -7,7 +7,9 @@ import {
     FETCH_START,
     FETCH_POTLUCK_SUCCESS,
     FETCH_FAIL,
-    DELETE_POTLUCK
+    DELETE_POTLUCK,
+    DELETE_POTLUCK_CONFIRM,
+    DELETE_POTLUCK_CANCEL
 } from '../actions/index';
 
 const initialState = {
@@ -44,7 +46,8 @@ const initialState = {
             foods: ['item 1', 'item 2'],
             guests: ['guest 1', 'guest 2'] 
           }
-    ]
+    ],
+    showModal: false
 };
 
 const potlucksReducer = (state = initialState, action) => {
@@ -99,7 +102,20 @@ const potlucksReducer = (state = initialState, action) => {
         case DELETE_POTLUCK:
             return {
                 ...state,
-                potluckList: state.potluckList.filter((potluck)=>potluck.potluck_id !==action.payload)
+                showModal: true
+            }
+        
+        case DELETE_POTLUCK_CONFIRM:
+            return {
+                ...state,
+                potlucks: state.potlucks.filter((potluck)=>potluck.id !==action.payload),
+                showModal: false
+            }
+
+        case DELETE_POTLUCK_CANCEL:
+            return {
+                ...state,
+                showModal: false
             }
         
         default:
