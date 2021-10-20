@@ -1,13 +1,22 @@
 import React from 'react';
+import { useParams, useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { deletePotluckConfirm, deletePotluckCancel } from '../actions';
 
 function DeletePotluckModal(props) {
+    const { potlucks } = props;
+    const { id } = useParams();
+    const { push } = useHistory();
+    
     const handleYes = () => {
-        props.handleDeleteYes()
+        props.deletePotluckConfirm(parseInt(id));
+        push("/potlucks")
     }
 
     const handleNo = () => {
-        props.handleDeleteNo();
+        props.deletePotluckCancel();
     }
+
     return (
         <div id="deletePotluckModal">
             <div className="modal-dialog">
@@ -31,4 +40,8 @@ function DeletePotluckModal(props) {
     )
 }
 
-export default DeletePotluckModal
+const mapStateToProps = state => ({
+        potlucks: state.potlucks
+})
+
+export default connect(mapStateToProps, { deletePotluckConfirm, deletePotluckCancel})(DeletePotluckModal)
