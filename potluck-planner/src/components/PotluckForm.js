@@ -64,10 +64,13 @@ const PotluckForm = () => {
 
   const handleSubmitForm = (event) => {
     event.preventDefault();
-    console.log(plannedPotluck);
     // Store plannedPotluck into a new state
-    setPotlucks([...potlucks, plannedPotluck]);
-    console.log(potlucks);
+    setPotlucks((potlucks) => {
+      const updated = [...potlucks, plannedPotluck];
+      console.log(updated);
+      return updated;
+    });
+    // Reseting form values
     setFormValues(initialFormValues);
     setGuestList(initialGuests);
     setFoodList(initialFoods);
@@ -105,11 +108,6 @@ const PotluckForm = () => {
     setGuestList(values);
   };
 
-  // const handleSubmitGuest = (event) => {
-  //   event.preventDefault();
-  //   console.log("Guest List", guestList);
-  // };
-
   // ----- Food List Handlers -----
 
   const handleFoodInput = (index, event) => {
@@ -129,11 +127,6 @@ const PotluckForm = () => {
     values.splice(index, 1);
     setFoodList(values);
   };
-
-  // const handleSubmitFoods = (event) => {
-  //   event.preventDefault();
-  //   console.log("Food List", foodList);
-  // };
 
   // ----- Returning Potluck Form -----
 
@@ -206,7 +199,6 @@ const PotluckForm = () => {
             </div>
           );
         })}
-        {/* <button onClick={handleSubmitGuest}>Submit Guest List</button> */}
       </div>
       {/* ----- Food List Inputs ----- */}
       <div>
@@ -239,7 +231,6 @@ const PotluckForm = () => {
             </div>
           );
         })}
-        {/* <button onClick={handleSubmitFoods}>Submit Foods List</button> */}
       </div>
       {/* Submiting Form */}
       <button onClick={handleSubmitForm}>Submit Potluck Form</button>
