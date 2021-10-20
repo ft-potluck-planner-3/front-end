@@ -1,6 +1,10 @@
 // Library Imports
 import React, { useState, useEffect } from "react";
+import * as yup from "yup";
 // import axios from "axios";
+
+// Component Imports
+import potluckFormSchema from "../schemas/potluckFormSchema";
 
 const PotluckForm = () => {
   // Initializing Form Data
@@ -27,10 +31,12 @@ const PotluckForm = () => {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [guestList, setGuestList] = useState(initialGuests);
   const [foodList, setFoodList] = useState(initialFoods);
+  const [formErrors, setFormErrors] = useState(initialFormValues);
   // plannedPotluck holds all the potluck data on when the form is submitted
   const [plannedPotluck, setPlannedPotluck] = useState(initialPlannedPotluck);
   const [potlucks, setPotlucks] = useState([]);
   // Disable Remove Guest Button if guestList has only 1 item
+  const [disableFormSubmit, setDisableFormSubmit] = useState(true);
   const [disableRemoveGuest, setDisableRemoveGuest] = useState(true);
   const [disableRemoveFood, setDisableRemoveFood] = useState(true);
 
@@ -54,8 +60,25 @@ const PotluckForm = () => {
     }
   }, [foodList]);
 
+  useEffect(() => {
+    potluckFormSchema
+      .isValid(formValues)
+      .then((valid) => setDisableFormSubmit(!valid));
+  }, [formValues]);
+
   // ----- Form Event Handlers -----
+  const validate = (name, value) => {
+    yup
+      .reach(potluckFormSchema, name)
+      .validate(value)
+      .then(() => setFormErrors({ ...formErrors, [name]: "" }))
+      .catch((error) =>
+        setFormErrors({ ...formErrors, [name]: error.errors[0] })
+      );
+  };
+
   const handleChanges = (event) => {
+    validate(event.target.name, event.target.value);
     setFormValues({
       ...formValues,
       [event.target.name]: event.target.value,
@@ -132,6 +155,14 @@ const PotluckForm = () => {
 
   return (
     <form>
+      {/* Validation Errors */}
+      <div>
+        <p>{formErrors.potluckName}</p>
+        <p>{formErrors.date}</p>
+        <p>{formErrors.time}</p>
+        <p>{formErrors.location}</p>
+      </div>
+      {/* Potluck Inputs */}
       <label>
         Potluck Name:
         <input
@@ -233,7 +264,9 @@ const PotluckForm = () => {
         })}
       </div>
       {/* Submiting Form */}
-      <button onClick={handleSubmitForm}>Submit Potluck Form</button>
+      <button onClick={handleSubmitForm} disabled={disableFormSubmit}>
+        Submit Potluck Form
+      </button>
     </form>
   );
 };
