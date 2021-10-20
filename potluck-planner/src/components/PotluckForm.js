@@ -67,9 +67,9 @@ const PotluckForm = () => {
     // Store plannedPotluck into a new state
     setPotlucks((potlucks) => {
       const updated = [...potlucks, plannedPotluck];
+      console.log(updated);
       return updated;
     });
-    console.log(potlucks);
     // Reseting form values
     setFormValues(initialFormValues);
     setGuestList(initialGuests);
