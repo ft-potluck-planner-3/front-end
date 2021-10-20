@@ -8,6 +8,8 @@ export const FETCH_START = "FETCH_START";
 export const FETCH_POTLUCK_SUCCESS = "FETCH_POTLUCK_SUCCESS ";
 export const FETCH_FAIL = "FETCH_FAIL";
 export const DELETE_POTLUCK = "DELETE_POTLUCK";
+export const DELETE_POTLUCK_CONFIRM = "DELETE_POTLUCK_CONFIRM";
+export const DELETE_POTLUCK_CANCEL = "DELETE_POTLUCK_CANCEL";
 
 // export const getPotlucks = () => {
 //   return (dispatch) => {
@@ -51,6 +53,14 @@ export const login = (userID) => {
   return { type: LOGIN, payload: userID };
 };
 
-export const deletePotluck = (potluckId) => {
-  return { type: DELETE_POTLUCK, payload: potluckId}
+export const deletePotluck = () => {
+  return { type: DELETE_POTLUCK}
+}
+
+export const deletePotluckConfirm = (potluckId) => {
+  return { type: DELETE_POTLUCK_CONFIRM, payload: potluckId}
+}
+
+export const deletePotluckCancel = () => {
+  return { type: DELETE_POTLUCK_CANCEL}
 }
