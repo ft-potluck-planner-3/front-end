@@ -1,3 +1,6 @@
+html {
+  box-sizing: border-box;
+}
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
@@ -303,6 +306,41 @@ template {
 [hidden] {
   display: none;
 }
+.nav-bar {
+  background-color: #f6f6f6;
+  border-radius: 0 0 2rem 2rem;
+  margin: 0 0 3rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 3rem;
+}
+.nav-bar__logo-container {
+  max-height: 6rem;
+  max-width: 6rem;
+}
+.nav-bar__logo {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  transition: all 0.2s;
+}
+.nav-bar__logo:hover {
+  box-shadow: 0 0 1rem #2f2f2f;
+}
+.nav-bar__link {
+  background-color: #2f2f2f;
+  color: #f6f6f6;
+  text-decoration: none;
+  border-radius: 2rem;
+  margin: 0 2rem;
+  padding: 1rem;
+  transition: all 0.2s;
+}
+.nav-bar__link:hover {
+  box-shadow: 0 0 1rem #2f2f2f;
+}
 html {
   font-family: "Cantarell", sans-serif;
 }
@@ -321,7 +359,9 @@ body {
   display: flex;
   justify-content: center;
   background-image: url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1470&q=80");
-  padding: 10rem;
+  padding: 14rem;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .homepage__header-container {
   padding: 1rem 4rem;
