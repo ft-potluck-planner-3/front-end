@@ -92,19 +92,13 @@ const potlucksReducer = (state = initialState, action) => {
       };
 
     case EDIT_POTLUCK:
-        console.log(action.payload);
       return {
         ...state,
         potlucks: state.potlucks.map((potluck) => {
           if (potluck.id !== action.payload.id) {
             return potluck;
           } else {
-            return {
-              ...potluck,
-              [potluck.date]: action.payload.date,
-              [potluck.time]: action.payload.time,
-              [potluck.location]: action.payload.location,
-            };
+            return action.payload
           }
         }),
       };
