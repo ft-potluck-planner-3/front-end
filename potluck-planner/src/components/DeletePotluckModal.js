@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { deletePotluckConfirm, deletePotluckCancel } from '../actions';
 
 function DeletePotluckModal(props) {
-    const { potlucks } = props;
     const { id } = useParams();
     const { push } = useHistory();
     
@@ -40,8 +39,4 @@ function DeletePotluckModal(props) {
     )
 }
 
-const mapStateToProps = state => ({
-        potlucks: state.potlucks
-})
-
-export default connect(mapStateToProps, { deletePotluckConfirm, deletePotluckCancel})(DeletePotluckModal)
+export default connect(null, { deletePotluckConfirm, deletePotluckCancel})(DeletePotluckModal)

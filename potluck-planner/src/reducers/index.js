@@ -93,10 +93,20 @@ const potlucksReducer = (state = initialState, action) => {
             };
 
         case EDIT_POTLUCK:
-            const editItem = state.item.find((item) => item.id === action.payload);
             return {
                 ...state,
-                item: editItem,
+                potlucks: state.potlucks.map(potluck => {
+                    if (potluck.id !== action.payload.id) {
+                        return potluck
+                    } else {
+                        return {
+                            ...potluck,
+                            [potluck.date]:action.payload.date,
+                            [potluck.time]:action.payload.time,
+                            [potluck.location]:action.payload.location
+                        }
+                    }
+                })
             };
 
         case DELETE_POTLUCK:
