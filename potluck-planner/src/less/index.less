@@ -2,11 +2,19 @@
 
 // Please only import other .less files into this file
 
+// If you are use any colors in your stylsheets, please add it to the global style variables
+
 // ----- Global Style Variables -----
 @dark-grey: #2f2f2f;
 @light-grey: #f6f6f6;
 
+html {
+  box-sizing: border-box;
+}
+
 // ----- Stylesheet Imports -----
+@import "./normalize.less";
+@import "./navbar.less";
 @import "./homepage.less";
-@import "./footer.less";
 @import "./potluck.less";
+@import "./footer.less";

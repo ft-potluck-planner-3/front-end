@@ -8,6 +8,8 @@ import Potluck from "./components/Potluck";
 import Logout from "./components/Logout";
 import EditPotluckForm from "./components/EditPotluckForm";
 import PrivateRoute from "./components/PrivateRoute";
+// Logo Image Import
+import logo from "./images/logo.png";
 
 // Library Imports
 import { NavLink, Route, Switch } from "react-router-dom";
@@ -18,14 +20,38 @@ function App() {
 
   return (
     <div className="App">
-      <nav>
-        <h1>Potluck Planner</h1>
-        <div className="nav-links">
-          <NavLink to="/login">Login</NavLink>
-          <NavLink to="/signup">Sign-up</NavLink>
-          {isLoggedIn && <NavLink to="/potlucks">View Potlucks</NavLink>}
-          {isLoggedIn && <NavLink to="/create">Create Potlucks</NavLink>}
-          {isLoggedIn && <NavLink to="/logout">Logout</NavLink>}
+      <nav className="nav-bar">
+        <div className="nav-bar__logo-container">
+          <NavLink className="nav-bar__logo-link" to="/">
+            <img
+              className="nav-bar__logo"
+              src={logo}
+              alt="potluck planner logo"
+            />
+          </NavLink>
+        </div>
+        <div className="nav-bar__link-container">
+          <NavLink className="nav-bar__link" to="/login">
+            Login
+          </NavLink>
+          <NavLink className="nav-bar__link" to="/signup">
+            Sign-up
+          </NavLink>
+          {isLoggedIn && (
+            <NavLink className="nav-bar__link" to="/potlucks">
+              View Potlucks
+            </NavLink>
+          )}
+          {isLoggedIn && (
+            <NavLink className="nav-bar__link" to="/create">
+              Create Potlucks
+            </NavLink>
+          )}
+          {isLoggedIn && (
+            <NavLink className="nav-bar__link" to="/logout">
+              Logout
+            </NavLink>
+          )}
         </div>
       </nav>
       <Switch>
@@ -50,7 +76,6 @@ function App() {
         <Route path="/">
           <HomePage />
         </Route>
-        
       </Switch>
       <Footer />
     </div>
