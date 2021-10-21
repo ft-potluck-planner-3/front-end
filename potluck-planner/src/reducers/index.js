@@ -92,6 +92,7 @@ const potlucksReducer = (state = initialState, action) => {
       };
 
     case EDIT_POTLUCK:
+        console.log(action.payload);
       return {
         ...state,
         potlucks: state.potlucks.map((potluck) => {
