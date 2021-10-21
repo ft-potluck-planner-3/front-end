@@ -1,12 +1,16 @@
 // Library Imports
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
+import { useHistory } from "react-router";
+import { connect } from 'react-redux';
+import { addPotluck } from "../actions";
 // import axios from "axios";
 
 // Component Imports
 import potluckFormSchema from "../schemas/potluckFormSchema";
 
-const PotluckForm = () => {
+const PotluckForm = (props) => {
+  const { push } = useHistory();
   // Initializing Form Data
   const initialFormValues = {
     potluckName: "",
@@ -16,6 +20,7 @@ const PotluckForm = () => {
   };
 
   const initialPlannedPotluck = {
+    id: "",
     potluckName: "",
     date: "",
     time: "",
@@ -32,9 +37,9 @@ const PotluckForm = () => {
   const [guestList, setGuestList] = useState(initialGuests);
   const [foodList, setFoodList] = useState(initialFoods);
   const [formErrors, setFormErrors] = useState(initialFormValues);
+  const { potlucks } = props;
   // plannedPotluck holds all the potluck data on when the form is submitted
   const [plannedPotluck, setPlannedPotluck] = useState(initialPlannedPotluck);
-  const [potlucks, setPotlucks] = useState([]);
   // Disable Remove Guest Button if guestList has only 1 item
   const [disableFormSubmit, setDisableFormSubmit] = useState(true);
   const [disableRemoveGuest, setDisableRemoveGuest] = useState(true);
@@ -87,20 +92,18 @@ const PotluckForm = () => {
 
   const handleSubmitForm = (event) => {
     event.preventDefault();
-    // Store plannedPotluck into a new state
-    setPotlucks((potlucks) => {
-      const updated = [...potlucks, plannedPotluck];
-      console.log(updated);
-      return updated;
-    });
-    // Reseting form values
+    // Store plannedPotluck into state
+    props.addPotluck(plannedPotluck)
+    // Resetting form values
     setFormValues(initialFormValues);
     setGuestList(initialGuests);
     setFoodList(initialFoods);
+    push("/potlucks");
   };
 
   useEffect(() => {
     const newPlannedPotluck = {
+      id: potlucks.length+1,
       potluckName: formValues.potluckName,
       date: formValues.date,
       time: formValues.time,
@@ -271,4 +274,10 @@ const PotluckForm = () => {
   );
 };
 
-export default PotluckForm;
+const mapStateToProps = state => {
+  return {
+    potlucks: state.potlucks
+  }
+}
+
+export default connect(mapStateToProps, { addPotluck })(PotluckForm);

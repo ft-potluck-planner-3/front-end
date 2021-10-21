@@ -26,6 +26,11 @@ const Footer =() =>{
                         <h4>Kseniya Platonava</h4>
                         <a href='https://github.com/Kseniyapl'>{imgGit1}</a>
                     </p>  
+                    <p className="gitHub">
+                        <h4>Adam Smith</h4>
+                        <a href='https://github.com/acshatr?tab=repositories'>{imgGit1}</a>
+                    </p> 
+
             </div>
             <div className="backEnd">
                 <h3>Back End:</h3>
