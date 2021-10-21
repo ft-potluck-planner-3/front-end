@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import { useHistory } from "react-router";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import { addPotluck } from "../actions";
 // import axios from "axios";
 
@@ -19,18 +19,18 @@ const PotluckForm = (props) => {
     location: "",
   };
 
+  const initialGuests = [{ guest: "", isComing: "" }];
+  const initialFoods = [{ food: "", isBrought: "" }];
+
   const initialPlannedPotluck = {
     id: "",
     potluckName: "",
     date: "",
     time: "",
     location: "",
-    guests: [""],
-    foods: [""],
+    guests: initialGuests,
+    foods: initialFoods,
   };
-
-  const initialGuests = [""];
-  const initialFoods = [""];
 
   // State Managment
   const [formValues, setFormValues] = useState(initialFormValues);
@@ -93,7 +93,7 @@ const PotluckForm = (props) => {
   const handleSubmitForm = (event) => {
     event.preventDefault();
     // Store plannedPotluck into state
-    props.addPotluck(plannedPotluck)
+    props.addPotluck(plannedPotluck);
     // Resetting form values
     setFormValues(initialFormValues);
     setGuestList(initialGuests);
@@ -103,13 +103,13 @@ const PotluckForm = (props) => {
 
   useEffect(() => {
     const newPlannedPotluck = {
-      id: potlucks.length+1,
+      id: potlucks.length + 1,
       potluckName: formValues.potluckName,
       date: formValues.date,
       time: formValues.time,
       location: formValues.location,
-      guests: [guestList],
-      foods: [foodList],
+      guests: guestList,
+      foods: foodList,
     };
     setPlannedPotluck(newPlannedPotluck);
   }, [formValues, guestList, foodList]);
@@ -118,13 +118,13 @@ const PotluckForm = (props) => {
 
   const handleGuestInput = (index, event) => {
     const values = [...guestList];
-    values[index] = event.target.value;
+    values[index][event.target.name] = event.target.value;
     setGuestList(values);
   };
 
   const handleAddGuest = (event) => {
     event.preventDefault();
-    setGuestList([...guestList, ""]);
+    setGuestList([...guestList, initialGuests]);
   };
 
   const handleRemoveGuest = (event, index) => {
@@ -138,13 +138,13 @@ const PotluckForm = (props) => {
 
   const handleFoodInput = (index, event) => {
     const values = [...foodList];
-    values[index] = event.target.value;
+    values[index][event.target.name] = event.target.value;
     setFoodList(values);
   };
 
   const handleAddFood = (event) => {
     event.preventDefault();
-    setFoodList([...foodList, ""]);
+    setFoodList([...foodList, initialFoods]);
   };
 
   const handleRemoveFood = (event, index) => {
@@ -203,69 +203,73 @@ const PotluckForm = (props) => {
         />
       </label>
       {/* ----- Guest List Inputs ----- */}
-      <div>
-        <label>Add Guests:</label>
-        {guestList.map((guest, index) => {
-          return (
-            <div key={index}>
-              <input
-                type="text"
-                name="guest"
-                placeholder="Guest's Name"
-                value={guest}
-                onChange={(event) => handleGuestInput(index, event)}
-              />
-              <button
-                onClick={(event) => {
-                  handleAddGuest(event);
-                }}
-              >
-                +
-              </button>
-              <button
-                disabled={disableRemoveGuest}
-                onClick={(event) => {
-                  handleRemoveGuest(event, index);
-                }}
-              >
-                -
-              </button>
-            </div>
-          );
-        })}
-      </div>
+      <form>
+        <label>
+          Add Guests:
+          {guestList.map((guest, index) => {
+            return (
+              <div key={index}>
+                <input
+                  type="text"
+                  name="guest"
+                  placeholder="Guest's Name"
+                  value={guest.guest}
+                  onChange={(event) => handleGuestInput(index, event)}
+                />
+                <button
+                  onClick={(event) => {
+                    handleAddGuest(event);
+                  }}
+                >
+                  +
+                </button>
+                <button
+                  disabled={disableRemoveGuest}
+                  onClick={(event) => {
+                    handleRemoveGuest(event, index);
+                  }}
+                >
+                  -
+                </button>
+              </div>
+            );
+          })}
+        </label>
+      </form>
       {/* ----- Food List Inputs ----- */}
-      <div>
-        <label>Add Foods:</label>
-        {foodList.map((food, index) => {
-          return (
-            <div key={index}>
-              <input
-                type="text"
-                name="food"
-                placeholder="Food"
-                value={food}
-                onChange={(event) => handleFoodInput(index, event)}
-              />
-              <button
-                onClick={(event) => {
-                  handleAddFood(event);
-                }}
-              >
-                +
-              </button>
-              <button
-                disabled={disableRemoveFood}
-                onClick={(event) => {
-                  handleRemoveFood(event, index);
-                }}
-              >
-                -
-              </button>
-            </div>
-          );
-        })}
-      </div>
+      <form>
+        <label>
+          Add Foods:
+          {foodList.map((food, index) => {
+            return (
+              <div key={index}>
+                <input
+                  type="text"
+                  name="food"
+                  placeholder="Food"
+                  value={food.food}
+                  onChange={(event) => handleFoodInput(index, event)}
+                />
+                <button
+                  onClick={(event) => {
+                    handleAddFood(event);
+                  }}
+                >
+                  +
+                </button>
+                <button
+                  disabled={disableRemoveFood}
+                  onClick={(event) => {
+                    handleRemoveFood(event, index);
+                  }}
+                >
+                  -
+                </button>
+              </div>
+            );
+          })}
+        </label>
+      </form>
       {/* Submiting Form */}
       <button onClick={handleSubmitForm} disabled={disableFormSubmit}>
         Submit Potluck Form
@@ -274,10 +278,10 @@ const PotluckForm = (props) => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    potlucks: state.potlucks
-  }
-}
+    potlucks: state.potlucks,
+  };
+};
 
 export default connect(mapStateToProps, { addPotluck })(PotluckForm);
