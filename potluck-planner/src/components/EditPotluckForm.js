@@ -20,7 +20,7 @@ function EditPotluckForm(props) {
       const [potluck, setPotluck] = useState(potlucks.find(potluck => potluck.id === parseInt(id)));
       const [formErrors, setFormErrors] = useState(initialFormErrors);
       const [disableFormSubmit, setDisableFormSubmit] = useState(true);
-    
+      
       useEffect(() => {
         potluckFormSchema
           .isValid(potluck)
@@ -45,11 +45,11 @@ function EditPotluckForm(props) {
           [event.target.name]: event.target.value,
         });
       };
-
+      
       const handleSubmitForm = (event) => {
         event.preventDefault();
-        // Store plannedPotluck into a new state
-        editPotluck(potluck);
+        // Store plannedPotluck into state
+        props.editPotluck(potluck);
         push(`/potlucks/${id}`)
       };
 
