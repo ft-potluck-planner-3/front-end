@@ -62,7 +62,7 @@ function Login(props) {
 
   return (
     <div>
-      <h2>Please enter your login information.</h2>
+      <h2 className='loginHeader'>Please enter your login information.</h2>
       <div>
         <p>{loginErrors.username}</p>
         <p>{loginErrors.password}</p>
@@ -77,7 +77,7 @@ function Login(props) {
             value={credentials.username}
           />
         </label>
-        <label>
+        <label className>
           Password:
           <input
             type="password"

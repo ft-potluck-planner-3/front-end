@@ -11,6 +11,7 @@ import PrivateRoute from "./components/PrivateRoute";
 
 // Library Imports
 import { NavLink, Route, Switch } from "react-router-dom";
+import Footer from "./components/Footer";
 
 function App() {
   const isLoggedIn = localStorage.getItem("token");
@@ -49,7 +50,9 @@ function App() {
         <Route path="/">
           <HomePage />
         </Route>
+        
       </Switch>
+      <Footer />
     </div>
   );
 }
