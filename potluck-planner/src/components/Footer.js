@@ -34,10 +34,10 @@ const Footer =() =>{
             </div>
             <div className="backEnd">
                 <h3>Back End:</h3>
-                <p className="gitHub">
+                <div className="gitHub">
                         <h4>Allison Homem</h4>
                         <a href='https://github.com/allisonhomem'>{imgGit1}</a>
-                    </p>  
+                    </div>  
                    
             </div>
            
