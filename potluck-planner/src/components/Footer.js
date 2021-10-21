@@ -14,22 +14,22 @@ const Footer =() =>{
            className='footer_container' >
            <div className="frondEnd">
                 <h3>Front End:</h3>
-                    <p className="gitHub">
+                    <div className="gitHub">
                       <h4>Waylon Turbes </h4>
                         <a href='https://github.com/DoctorWayWay'>{imgGit1}</a>
-                    </p> 
-                    <p className="gitHub">
+                    </div> 
+                    <div className="gitHub">
                         <h4>Jim Lemoine </h4> 
                         <a href='https://github.com/jimlemoine'>{imgGit1}</a>
-                    </p>   
-                        <p className="gitHub">
+                    </div>   
+                    <div className="gitHub">
                         <h4>Kseniya Platonava</h4>
                         <a href='https://github.com/Kseniyapl'>{imgGit1}</a>
-                    </p>  
-                    <p className="gitHub">
+                    </div>  
+                    <div className="gitHub">
                         <h4>Adam Smith</h4>
                         <a href='https://github.com/acshatr?tab=repositories'>{imgGit1}</a>
-                    </p> 
+                    </div> 
 
             </div>
             <div className="backEnd">
