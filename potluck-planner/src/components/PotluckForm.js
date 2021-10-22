@@ -157,7 +157,7 @@ const PotluckForm = (props) => {
   // ----- Returning Potluck Form -----
 
   return (
-    <form>
+    <form className="form">
       {/* Validation Errors */}
       <div>
         <p>{formErrors.potluckName}</p>
@@ -166,42 +166,47 @@ const PotluckForm = (props) => {
         <p>{formErrors.location}</p>
       </div>
       {/* Potluck Inputs */}
-      <label>
-        Potluck Name:
-        <input
-          type="text"
-          name="potluckName"
-          value={formValues.potluckName}
-          onChange={handleChanges}
-        />
-      </label>
-      <label>
-        Date:
-        <input
-          type="text"
-          name="date"
-          value={formValues.date}
-          onChange={handleChanges}
-        />
-      </label>
-      <label>
-        Time:
-        <input
-          type="text"
-          name="time"
-          value={formValues.time}
-          onChange={handleChanges}
-        />
-      </label>
-      <label>
-        Location:
-        <input
-          type="text"
-          name="location"
-          value={formValues.location}
-          onChange={handleChanges}
-        />
-      </label>
+      <div className="form__inputs">
+        <label>
+          Potluck Name:
+          <input
+            type="text"
+            name="potluckName"
+            value={formValues.potluckName}
+            onChange={handleChanges}
+          />
+        </label>
+        <br />
+        <label>
+          Date:
+          <input
+            type="text"
+            name="date"
+            value={formValues.date}
+            onChange={handleChanges}
+          />
+        </label>
+        <br />
+        <label>
+          Time:
+          <input
+            type="text"
+            name="time"
+            value={formValues.time}
+            onChange={handleChanges}
+          />
+        </label>
+        <br />
+        <label>
+          Location:
+          <input
+            type="text"
+            name="location"
+            value={formValues.location}
+            onChange={handleChanges}
+          />
+        </label>
+      </div>
       {/* ----- Guest List Inputs ----- */}
       <form>
         <label>
@@ -217,6 +222,7 @@ const PotluckForm = (props) => {
                   onChange={(event) => handleGuestInput(index, event)}
                 />
                 <button
+                  className="button button--dec-inc"
                   onClick={(event) => {
                     handleAddGuest(event);
                   }}
@@ -224,6 +230,7 @@ const PotluckForm = (props) => {
                   +
                 </button>
                 <button
+                  className="button button--dec-inc"
                   disabled={disableRemoveGuest}
                   onClick={(event) => {
                     handleRemoveGuest(event, index);
@@ -251,6 +258,7 @@ const PotluckForm = (props) => {
                   onChange={(event) => handleFoodInput(index, event)}
                 />
                 <button
+                  className="button button--dec-inc"
                   onClick={(event) => {
                     handleAddFood(event);
                   }}
@@ -258,6 +266,7 @@ const PotluckForm = (props) => {
                   +
                 </button>
                 <button
+                  className="button button--dec-inc"
                   disabled={disableRemoveFood}
                   onClick={(event) => {
                     handleRemoveFood(event, index);
@@ -271,7 +280,11 @@ const PotluckForm = (props) => {
         </label>
       </form>
       {/* Submiting Form */}
-      <button onClick={handleSubmitForm} disabled={disableFormSubmit}>
+      <button
+        className="button button--submit"
+        onClick={handleSubmitForm}
+        disabled={disableFormSubmit}
+      >
         Submit Potluck Form
       </button>
     </form>

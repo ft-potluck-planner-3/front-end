@@ -306,6 +306,32 @@ template {
 [hidden] {
   display: none;
 }
+.button {
+  background-color: #f6f6f6;
+  border: none;
+  padding: 0.6rem 1rem;
+  text-decoration: none;
+  border-radius: 0.3rem;
+  color: #2f2f2f;
+  transition: all 0.2s;
+}
+.button:hover {
+  color: #fdc921;
+  cursor: pointer;
+}
+.button--dec-inc {
+  margin: 0.4rem;
+}
+.button--submit {
+  margin: 1rem 0;
+}
+.form__inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: baseline;
+  margin-bottom: 1rem;
+}
 .nav-bar {
   background-color: #f6f6f6;
   border-radius: 0 0 2rem 2rem;
