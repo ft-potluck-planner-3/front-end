@@ -11,6 +11,7 @@ export const DELETE_POTLUCK = "DELETE_POTLUCK";
 export const DELETE_POTLUCK_CONFIRM = "DELETE_POTLUCK_CONFIRM";
 export const DELETE_POTLUCK_CANCEL = "DELETE_POTLUCK_CANCEL";
 export const TOGGLE_COMING = "TOGGLE_COMING";
+export const TOGGLE_BROUGHT = "TOGGLE_BROUGHT";
 
 // export const getPotlucks = () => {
 //   return (dispatch) => {
@@ -68,4 +69,8 @@ export const deletePotluckCancel = () => {
 
 export const toggleComing = (potluck) => {
   return { type: TOGGLE_COMING, payload: potluck}
+}
+
+export const toggleBrought = (potluck) => {
+  return { type: TOGGLE_BROUGHT, payload: potluck}
 }
