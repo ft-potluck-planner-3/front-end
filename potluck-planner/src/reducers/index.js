@@ -10,6 +10,7 @@ import {
   DELETE_POTLUCK,
   DELETE_POTLUCK_CONFIRM,
   DELETE_POTLUCK_CANCEL,
+  TOGGLE_COMING
 } from "../actions/index";
 
 const initialState = {
@@ -122,6 +123,18 @@ const potlucksReducer = (state = initialState, action) => {
       return {
         ...state,
         showModal: false,
+      };
+
+    case TOGGLE_COMING:
+      return {
+        ...state,
+        potlucks: state.potlucks.map((potluck) => {
+          if (potluck.id !== action.payload.id) {
+            return potluck;
+          } else {
+            return action.payload
+          }
+        }),
       };
 
     default:
