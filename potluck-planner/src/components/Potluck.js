@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 // import axios from 'axios';
 import { connect } from "react-redux";
-import { deletePotluck, toggleComing } from "../actions";
+import { deletePotluck, toggleComing, toggleBrought } from "../actions";
 import DeletePotluckModal from "./DeletePotluckModal";
 
 const Potluck = (props) => {
@@ -54,6 +54,24 @@ const Potluck = (props) => {
     toggleComing(potluck);
   };
 
+  const handleClickFood = (event) => {
+    event.preventDefault();
+    setPotluck({
+      ...potluck,
+      foods: potluck.foods.map((food) => {
+        if (food.food === event.target.name) {
+          return {
+            ...food,
+            isBrought: !food.isBrought,
+          };
+        } else {
+          return food;
+        }
+      }),
+    });
+    toggleBrought(potluck);
+  };
+
   return (
     <div className="potluck" key={id}>
       <h3 className="potluck__title">{potluck.potluckName}</h3>
@@ -67,7 +85,11 @@ const Potluck = (props) => {
         {potluck.foods.map((food, index) => (
           <li key={index}>
             {food.food} {food.isBrought ? "Is being brought" : "Is available"}{" "}
-            <button className="button potluck__button">Bring This Food</button>
+            <button 
+              className="button potluck__button"
+              type="button"
+              name={food.food}
+              onClick={handleClickFood}>Bring This Food</button>
           </li>
         ))}
       </ul>
@@ -114,6 +136,6 @@ const mapStateToProps = (state) => {
     showModal: state.showModal,
   };
 };
-export default connect(mapStateToProps, { deletePotluck, toggleComing })(
+export default connect(mapStateToProps, { deletePotluck, toggleComing, toggleBrought })(
   Potluck
 );
