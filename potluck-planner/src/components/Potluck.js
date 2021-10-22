@@ -10,8 +10,10 @@ const Potluck = (props) => {
 
   const { potlucks, showModal } = props;
 
-  const initialPotluck = potlucks.find((potluck) => potluck.id === parseInt(id));
-  const [potluck, setPotluck] = useState(initialPotluck)
+  const initialPotluck = potlucks.find(
+    (potluck) => potluck.id === parseInt(id)
+  );
+  const [potluck, setPotluck] = useState(initialPotluck);
 
   const handleDelete = () => {
     props.deletePotluck();
@@ -34,7 +36,7 @@ const Potluck = (props) => {
   //     setShowModal(false);
   // }
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     event.preventDefault();
     setPotluck({
       ...potluck,
@@ -42,44 +44,59 @@ const Potluck = (props) => {
         if (guest.guest === event.target.name) {
           return {
             ...guest,
-            isComing: !guest.isComing
-          }
+            isComing: !guest.isComing,
+          };
         } else {
-            return guest
+          return guest;
         }
-      })
-    })
+      }),
+    });
     toggleComing(potluck);
-  }
+  };
 
   return (
     <div className="potluck" key={id}>
-      <h3>{potluck.potluckName}</h3>
-      <p>Date: {potluck.date}</p>
-      <p>Time: {potluck.time}</p>
-      <p>Location: {potluck.location}</p>
-      <p>Food List:</p>
-      <ul>
+      <h3 className="potluck__title">{potluck.potluckName}</h3>
+      <p className="paragraph potluck__paragraph">Date: {potluck.date}</p>
+      <p className="paragraph potluck__paragraph">Time: {potluck.time}</p>
+      <p className="paragraph potluck__paragraph">
+        Location: {potluck.location}
+      </p>
+      <p className="paragraph potluck__paragraph">Food List:</p>
+      <ul className="potluck__unordered-list">
         {potluck.foods.map((food, index) => (
           <li key={index}>
             {food.food} {food.isBrought ? "Is being brought" : "Is available"}{" "}
-            <button>Bring This Food</button>
+            <button className="button potluck__button">Bring This Food</button>
           </li>
         ))}
       </ul>
-      <p>Guest List:</p>
-      <ul>
+      <p className="paragraph potluck__paragraph">Guest List:</p>
+      <ul className="potluck__unordered-list">
         {potluck.guests.map((guest, index) => (
           <li key={index}>
             {guest.guest} {guest.isComing ? "Is coming" : "Not coming"}{" "}
-            <button type="button" name={guest.guest} onClick={handleClick}>RSVP</button>
+            <button
+              className="button potluck__button"
+              type="button"
+              name={guest.guest}
+              onClick={handleClick}
+            >
+              RSVP
+            </button>
           </li>
         ))}
       </ul>
       <section>
-        <Link to={`/potlucks/edit/${potluck.id}`}>Edit Potluck Details</Link>
+        <Link
+          className="button potluck__button"
+          to={`/potlucks/edit/${potluck.id}`}
+        >
+          Edit Potluck Details
+        </Link>
         <span>
           <input
+            className="button potluck__button"
             type="button"
             onClick={handleDelete}
             value="Delete this Potluck"
@@ -97,4 +114,6 @@ const mapStateToProps = (state) => {
     showModal: state.showModal,
   };
 };
-export default connect(mapStateToProps, { deletePotluck, toggleComing })(Potluck);
+export default connect(mapStateToProps, { deletePotluck, toggleComing })(
+  Potluck
+);
