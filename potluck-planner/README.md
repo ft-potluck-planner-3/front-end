@@ -1,3 +1,5 @@
+Login using username Frodo and password 1234
+
 Instructions
 * [ ] Do NOT fork.
 * [ ] Clone the project.
