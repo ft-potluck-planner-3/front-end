@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 // import axios from 'axios';
 import { connect } from "react-redux";
-import { deletePotluck } from "../actions";
+import { deletePotluck, toggleComing } from "../actions";
 import DeletePotluckModal from "./DeletePotluckModal";
 
 const Potluck = (props) => {
@@ -10,7 +10,8 @@ const Potluck = (props) => {
 
   const { potlucks, showModal } = props;
 
-  const potluck = potlucks.find((potluck) => potluck.id === parseInt(id));
+  const initialPotluck = potlucks.find((potluck) => potluck.id === parseInt(id));
+  const [potluck, setPotluck] = useState(initialPotluck)
 
   const handleDelete = () => {
     props.deletePotluck();
@@ -32,6 +33,25 @@ const Potluck = (props) => {
   // const handleDeleteNo = () => {
   //     setShowModal(false);
   // }
+
+  const handleClick = event => {
+    event.preventDefault();
+    setPotluck({
+      ...potluck,
+      guests: potluck.guests.map((guest) => {
+        if (guest.guest === event.target.name) {
+          return {
+            ...guest,
+            isComing: !guest.isComing
+          }
+        } else {
+            return guest
+        }
+      })
+    })
+    toggleComing(potluck);
+  }
+
   return (
     <div className="potluck" key={id}>
       <h3>{potluck.potluckName}</h3>
@@ -52,7 +72,7 @@ const Potluck = (props) => {
         {potluck.guests.map((guest, index) => (
           <li key={index}>
             {guest.guest} {guest.isComing ? "Is coming" : "Not coming"}{" "}
-            <button>RSVP</button>
+            <button type="button" name={guest.guest} onClick={handleClick}>RSVP</button>
           </li>
         ))}
       </ul>
@@ -77,4 +97,4 @@ const mapStateToProps = (state) => {
     showModal: state.showModal,
   };
 };
-export default connect(mapStateToProps, { deletePotluck })(Potluck);
+export default connect(mapStateToProps, { deletePotluck, toggleComing })(Potluck);

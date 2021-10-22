@@ -10,6 +10,7 @@ export const FETCH_FAIL = "FETCH_FAIL";
 export const DELETE_POTLUCK = "DELETE_POTLUCK";
 export const DELETE_POTLUCK_CONFIRM = "DELETE_POTLUCK_CONFIRM";
 export const DELETE_POTLUCK_CANCEL = "DELETE_POTLUCK_CANCEL";
+export const TOGGLE_COMING = "TOGGLE_COMING";
 
 // export const getPotlucks = () => {
 //   return (dispatch) => {
@@ -63,4 +64,8 @@ export const deletePotluckConfirm = (potluckId) => {
 
 export const deletePotluckCancel = () => {
   return { type: DELETE_POTLUCK_CANCEL}
+}
+
+export const toggleComing = (potluck) => {
+  return { type: TOGGLE_COMING, payload: potluck}
 }
